@@ -1,0 +1,4 @@
+name: roman
+version: '1.0-SNAPSHOT'
+main: it.creeper.roman.Roman
+api-version: '1.18'
