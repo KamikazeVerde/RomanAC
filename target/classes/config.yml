@@ -1,5 +1,14 @@
 # RomanAC Config
 # by Creeper215
+# IMPORTANT: vl-reset-time works by MINUTES
 
-punishment-vl: 10
-alert-vl: 10
+violation-settings:
+  ban-vl: 60
+  kick-vl: 60
+  setback-vl: 3
+  alert-vl: 10
+  vl-reset-time: 1
+
+messages:
+  prefix: "[ROMANNN]"
+  vl-reset-message: "VL RESETTATO"

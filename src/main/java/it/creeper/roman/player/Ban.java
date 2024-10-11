@@ -10,8 +10,8 @@ import org.bukkit.entity.Player;
 public class Ban {
     Roman plugin = Roman.getInstance();
     CheatNotify cheatNotify = plugin.getCheatNotify();
-    int VL_TO_KICK = plugin.getConfig().getInt("kick-vl");
-    int VL_TO_BAN = plugin.getConfig().getInt("ban-vl");
+    int VL_TO_KICK = plugin.getConfig().getInt("violation-settings.kick-vl");
+    int VL_TO_BAN = plugin.getConfig().getInt("violation-settings.ban-vl");
     public void banPlayer(Player cheater) {
         if(cheatNotify.vl.get(cheater) != null) {
             if(cheatNotify.vl.get(cheater) >= VL_TO_BAN) {

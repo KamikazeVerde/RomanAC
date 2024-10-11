@@ -12,7 +12,7 @@ public class Setback {
 
     Roman plugin = Roman.getInstance();
 
-    int VL_TO_SETBACK = plugin.getConfig().getInt("setback-vl");
+    int VL_TO_SETBACK = plugin.getConfig().getInt("violation-settings.setback-vl");
 
     public void updatePlayerPos(Player player, Location location) {
         Location previous = this.currentPlayersLocations.get(player);
@@ -28,7 +28,7 @@ public class Setback {
     public void setbackPlayer(Player cheater) {
         if(plugin.getCheatNotify().vl.get(cheater) != null) {
             if(plugin.getCheatNotify().vl.get(cheater) >= VL_TO_SETBACK) {
-                Location setbackLocation = this.getPlayerLocation(cheater);
+                Location setbackLocation = plugin.getSetback().getPlayerLocation(cheater);
                 cheater.teleport(setbackLocation);
             }
         }

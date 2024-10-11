@@ -2,7 +2,6 @@ package it.creeper.roman.check;
 
 import it.creeper.roman.Roman;
 import it.creeper.roman.notify.CheatNotify;
-import it.creeper.roman.player.Ban;
 import org.bukkit.entity.Player;
 
 public class Check {
@@ -17,5 +16,21 @@ public class Check {
     public void possiblyKickPlayer(Player cheater) {
         plugin.getBanManager().kickPlayer(cheater);
     }
-
+    public void possiblySetbackPlayer(Player cheater) {
+        plugin.getSetback().setbackPlayer(cheater);
+    }
+    public String getCheckName(Class<?> checkClass) {
+        if(checkClass.isAnnotationPresent(CheckInfo.class)) {
+            return checkClass.getAnnotation(CheckInfo.class).name();
+        } else {
+            return "// FAIL //";
+        }
+    }
+    public char getCheckType(Class<?> typeClass) {
+        if(typeClass.isAnnotationPresent(CheckInfo.class)) {
+            return typeClass.getAnnotation(CheckInfo.class).type();
+        } else {
+            return '/';
+        }
+    }
 }

@@ -16,7 +16,9 @@ public final class Roman extends JavaPlugin {
     private Setback setback;
     public CheatNotify cheatNotify;
     public Ban banManager;
-
+    public static Long minToTick(long min) {
+        return min * 60 * 20;
+    }
 
     //public Register register = new Register();
     //private final Ban banManager = new Ban();
@@ -35,17 +37,23 @@ public final class Roman extends JavaPlugin {
         this.banManager = new Ban();
         this.setback = new Setback();
         this.getServer().getPluginManager().registerEvents(new TestCheck(), this);
+        String VL_RESET_MESSAGE = getConfig().getString("messages.vl-reset-message");
         // VL reset
-        this.getServer().getScheduler().runTaskLaterAsynchronously(this, () -> {
+        this.getServer().getScheduler().runTaskTimerAsynchronously(this, () -> {
             this.cheatNotify.vl.clear();
-            Bukkit.broadcast(ChatColor.translateAlternateColorCodes('&', "&7[&4&lRoman&7] &6Violazioni resettate per tutti i giocatori online"), "roman.notify");
-        }, 600L);
-        this.getServer().getScheduler().runTaskLaterAsynchronously(this, () -> {
-            for(Player player : getServer().getOnlinePlayers()) {
+            this.cheatNotify.flagCount.clear();
+            Bukkit.broadcast(ChatColor.translateAlternateColorCodes('&', this.cheatNotify.ALERT_PREFIX+" "+VL_RESET_MESSAGE), "roman.notify");
+        }, 20L, minToTick(getConfig().getLong("violation-settings.vl-reset-time")));
 
-                this.setback.updatePlayerPos(player, player.getLocation());
+
+        this.getServer().getScheduler().runTaskLaterAsynchronously(this, () -> {
+            while(this.isEnabled()) {
+                for(Player player : getServer().getOnlinePlayers()) {
+                    this.setback.updatePlayerPos(player, player.getLocation());
+                }
             }
         }, 1L);
+
     }
 
 
