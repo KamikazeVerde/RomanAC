@@ -11,7 +11,7 @@ public class TestCheck extends Check implements Listener {
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent e){
         possiblySetbackPlayer(e.getPlayer());
-        fail(e.getPlayer(), getCheckName(this.getClass()));
+        fail(e.getPlayer(), getCheckName(this.getClass()), getCheckType(this.getClass()));
         possiblyKickPlayer(e.getPlayer());
         e.setCancelled(true);
     }

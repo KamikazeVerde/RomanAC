@@ -3,3 +3,4 @@ version: '1.0-SNAPSHOT'
 main: it.creeper.roman.Roman
 api-version: '1.8.8'
 description: pizza anticheat frfr
+softdepend: [PlaceholderAPI]

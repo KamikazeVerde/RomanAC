@@ -10,5 +10,6 @@ violation-settings:
   vl-reset-time: 1
 
 messages:
-  prefix: "[ROMANNN]"
-  vl-reset-message: "VL RESETTATO"
+  prefix: "&7[&4&lR★AC&7]"
+  alert-message: "%player_name% potrebbe star utilizzando %roman_check% Type: %roman_type% VL: %roman_vl%"
+  vl-reset-message: "&6Tutte le &aviolazioni&6 di tutti i &cgiocatori&6 sono state &bresettate"

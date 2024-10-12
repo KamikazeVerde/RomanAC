@@ -7,8 +7,8 @@ import org.bukkit.entity.Player;
 public class Check {
     public Roman plugin = Roman.getInstance();
     CheatNotify cheatNotify = plugin.getCheatNotify();
-    public void fail(Player cheater, String check) {
-        cheatNotify.fail(cheater, check);
+    public void fail(Player cheater, String check, char type) {
+        cheatNotify.fail(cheater, check, type);
     }
     public void possiblyBanPlayer(Player cheater) {
         plugin.getBanManager().banPlayer(cheater);
