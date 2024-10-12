@@ -6,3 +6,4 @@
 TODO LIST:
 - Checks
 - Aura Bot
+- Various Utilities
