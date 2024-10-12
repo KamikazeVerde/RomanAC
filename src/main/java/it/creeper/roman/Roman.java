@@ -1,7 +1,7 @@
 package it.creeper.roman;
 
 import it.creeper.roman.check.Register;
-import it.creeper.roman.check.impl.TestCheck;
+import it.creeper.roman.command.MainCommand;
 import it.creeper.roman.mitigation.Setback;
 import it.creeper.roman.notify.CheatNotify;
 import it.creeper.roman.notify.Placeholders;
@@ -10,7 +10,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import it.creeper.roman.check.Register;
 
 public final class Roman extends JavaPlugin {
     private static Roman instance;
@@ -41,6 +40,7 @@ public final class Roman extends JavaPlugin {
         this.setback = new Setback();
         this.checkRegister = new Register();
         this.checkRegister.registerChecks();
+        getCommand("roman").setExecutor(new MainCommand());
         //this.getServer().getPluginManager().registerEvents(new TestCheck(), this);
         String VL_RESET_MESSAGE = getConfig().getString("messages.vl-reset-message");
         // VL reset

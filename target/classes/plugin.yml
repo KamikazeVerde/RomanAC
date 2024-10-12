@@ -4,3 +4,6 @@ main: it.creeper.roman.Roman
 api-version: '1.8.8'
 description: pizza anticheat frfr
 softdepend: [PlaceholderAPI]
+commands:
+  roman:
+    description: General plugin command

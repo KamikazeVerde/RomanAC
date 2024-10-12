@@ -1,4 +1,4 @@
-package it.creeper.roman.check.impl;
+package it.creeper.roman.check.impl.test;
 
 import it.creeper.roman.check.Check;
 import it.creeper.roman.check.CheckInfo;

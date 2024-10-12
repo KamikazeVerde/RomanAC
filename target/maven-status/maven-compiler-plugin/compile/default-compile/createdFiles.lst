@@ -1,10 +1,11 @@
-it\creeper\roman\check\impl\TestCheck2.class
 it\creeper\roman\player\Ban.class
-it\creeper\roman\notify\Placeholders.class
 it\creeper\roman\check\CheckInfo.class
 it\creeper\roman\notify\CheatNotify.class
+it\creeper\roman\check\impl\test\TestCheck.class
+it\creeper\roman\command\MainCommand.class
+it\creeper\roman\mitigation\Setback.class
+it\creeper\roman\check\impl\test\TestCheck2.class
+it\creeper\roman\notify\Placeholders.class
 it\creeper\roman\Roman.class
 it\creeper\roman\check\Check.class
-it\creeper\roman\check\impl\TestCheck.class
 it\creeper\roman\check\Register.class
-it\creeper\roman\mitigation\Setback.class
