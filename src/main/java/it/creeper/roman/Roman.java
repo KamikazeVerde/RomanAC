@@ -2,6 +2,7 @@ package it.creeper.roman;
 
 import it.creeper.roman.check.Register;
 import it.creeper.roman.command.MainCommand;
+import it.creeper.roman.math.Mathemathics;
 import it.creeper.roman.mitigation.Setback;
 import it.creeper.roman.notify.CheatNotify;
 import it.creeper.roman.notify.Placeholders;
@@ -17,13 +18,10 @@ public final class Roman extends JavaPlugin {
     public CheatNotify cheatNotify;
     public Ban banManager;
     public Register checkRegister;
+    public Mathemathics math;
     public static Long minToTick(long min) {
         return min * 60 * 20;
     }
-    //public Register register = new Register();
-    //private final Ban banManager = new Ban();
-    //private final CheatNotify cheatNotify = new CheatNotify();
-
     public void onEnable() {
         instance = this;
         getConfig().options().copyDefaults(true);
@@ -86,7 +84,7 @@ public final class Roman extends JavaPlugin {
         return this.banManager;
     }
 
-
-
-
+    public Mathemathics getMath() {
+        return math;
+    }
 }

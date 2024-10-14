@@ -31,7 +31,7 @@ public class Placeholders extends PlaceholderExpansion {
     public boolean persist() {
         return true; // This is required or else PlaceholderAPI will unregister the Expansion on reload
     }
-    //TODO FIXARE
+
     @Override
     public String onRequest(OfflinePlayer player, String params) {
         if(player == null) {

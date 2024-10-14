@@ -1,14 +1,16 @@
 package it.creeper.roman.check;
 
 import it.creeper.roman.Roman;
+import it.creeper.roman.math.Mathemathics;
 import it.creeper.roman.notify.CheatNotify;
 import org.bukkit.entity.Player;
 
 public class Check {
     public Roman plugin = Roman.getInstance();
+    public Mathemathics mathemathics = new Mathemathics();
     CheatNotify cheatNotify = plugin.getCheatNotify();
-    public void fail(Player cheater, String check, char type) {
-        cheatNotify.fail(cheater, check, type);
+    public void fail(Player cheater, String check, char type, String debug) {
+        cheatNotify.fail(cheater, check, type, debug);
     }
     public void possiblyBanPlayer(Player cheater) {
         plugin.getBanManager().banPlayer(cheater);

@@ -7,4 +7,5 @@ import java.lang.annotation.RetentionPolicy;
 public @interface CheckInfo {
     public String name();
     public char type();
+    public String description();
 }
