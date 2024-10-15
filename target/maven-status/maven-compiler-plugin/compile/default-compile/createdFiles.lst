@@ -11,6 +11,7 @@ it\creeper\roman\player\Data.class
 it\creeper\roman\check\impl\test\TestCheck2.class
 it\creeper\roman\notify\Placeholders.class
 it\creeper\roman\check\impl\combat\aura\AuraA.class
+it\creeper\roman\check\impl\scaffold\ScaffoldB.class
 it\creeper\roman\Roman.class
 it\creeper\roman\check\Check.class
 it\creeper\roman\check\Register.class

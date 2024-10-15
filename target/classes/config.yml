@@ -26,5 +26,6 @@ checks:
     groundspoof: true
   scaffold:
     a: true
+    b: true
   test-1: false
   test-2: false
