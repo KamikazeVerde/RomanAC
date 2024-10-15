@@ -24,5 +24,7 @@ checks:
       a: true
   movement:
     groundspoof: true
+  scaffold:
+    a: true
   test-1: false
   test-2: false
