@@ -20,7 +20,8 @@ public class FakeGround extends Check implements Listener {
             if(++buff > 1) {
                 fail(e.getPlayer(), getCheckName(this.getClass()), getCheckType(this.getClass()), "localGround=" + localGround + " serverGround="+lastServerGround);
                 possiblySetbackPlayer(e.getPlayer());
-                possiblyKickPlayer(e.getPlayer());
+                //possiblyKickPlayer(e.getPlayer());
+                possiblyPunish(e.getPlayer(), this.getClass());
             }
         } else if (buff > 0) buff--;
 

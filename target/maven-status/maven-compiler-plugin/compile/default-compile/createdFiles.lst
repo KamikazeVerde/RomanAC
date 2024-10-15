@@ -2,6 +2,7 @@ it\creeper\roman\player\Ban.class
 it\creeper\roman\check\CheckInfo.class
 it\creeper\roman\check\impl\movement\FakeGround.class
 it\creeper\roman\math\Mathemathics.class
+it\creeper\roman\check\impl\scaffold\ScaffoldC.class
 it\creeper\roman\notify\CheatNotify.class
 it\creeper\roman\check\impl\test\TestCheck.class
 it\creeper\roman\mitigation\Attack.class

@@ -14,7 +14,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import java.util.HashMap;
 import java.util.Map;
 
-@CheckInfo(name="Scaffold", type='A', description="Checks for impossible godbridge style scaffoldd")
+@CheckInfo(name="Scaffold", type='A', description="Checks for impossible godbridge style scaffold")
 public class ScaffoldA extends Check implements Listener {
     Roman plugin = Roman.getInstance();
     Data data = plugin.getData();
@@ -55,7 +55,8 @@ public class ScaffoldA extends Check implements Listener {
         if(this.blockCount.get(cheater) >= 10 && data.isOnGround(cheater) && !(cheater.isSneaking()) && pitch > 70 && pitch  < 88) {
             //System.out.println("Cheating Scaffold");
             fail(cheater, getCheckName(this.getClass()), getCheckType(this.getClass()), "count=" + this.blockCount.get(cheater));
-            possiblyKickPlayer(cheater);
+            //possiblyKickPlayer(cheater);
+            possiblyPunish(cheater, this.getClass());
         }
 
     }

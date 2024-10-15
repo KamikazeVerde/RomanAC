@@ -24,8 +24,10 @@ checks:
       a: true
   movement:
     groundspoof: true
+    punishment: "ban"
   scaffold:
     a: true
     b: true
+    punishment: "kick"
   test-1: false
   test-2: false

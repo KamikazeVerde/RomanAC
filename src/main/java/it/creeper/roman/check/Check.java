@@ -3,6 +3,7 @@ package it.creeper.roman.check;
 import it.creeper.roman.Roman;
 import it.creeper.roman.math.Mathemathics;
 import it.creeper.roman.notify.CheatNotify;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class Check {
@@ -34,5 +35,18 @@ public class Check {
         } else {
             return '/';
         }
+    }
+    public void possiblyPunish(Player player, Class<?> punishmentClass) {
+        String checkName = getCheckName(punishmentClass);
+        String punishment = plugin.getConfig().getString("checks."+checkName.toLowerCase()+".punishment");
+        if(punishment.equalsIgnoreCase("Kick")) {
+            possiblyKickPlayer(player);
+        } else if (punishment.equalsIgnoreCase("Ban")) {
+            possiblyBanPlayer(player);
+        } else if (punishment.equalsIgnoreCase("None")) {
+            return;
+        }
+
+
     }
 }

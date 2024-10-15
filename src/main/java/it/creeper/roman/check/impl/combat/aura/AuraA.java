@@ -4,6 +4,7 @@ import com.github.retrooper.packetevents.event.PacketListener;
 import com.github.retrooper.packetevents.event.PacketReceiveEvent;
 import com.github.retrooper.packetevents.protocol.packettype.PacketType;
 import com.github.retrooper.packetevents.protocol.player.User;
+import it.creeper.roman.Roman;
 import it.creeper.roman.check.Check;
 import it.creeper.roman.check.CheckInfo;
 import org.bukkit.Bukkit;
@@ -19,6 +20,7 @@ public class AuraA extends Check implements PacketListener {
                 delay = System.currentTimeMillis() - lastFlying;
                 fail(event.getPlayer(), getCheckName(this.getClass()), getCheckType(this.getClass()), "delay= "+delay);
                 possiblySetbackPlayer(event.getPlayer());
+                Bukkit.getScheduler().runTask(Roman.getInstance(), () -> possiblyPunish(event.getPlayer(), this.getClass()));
                 delay = 0;
             }
         } else {

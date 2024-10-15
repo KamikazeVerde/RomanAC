@@ -6,8 +6,10 @@ import com.github.retrooper.packetevents.protocol.packettype.PacketType;
 import com.github.retrooper.packetevents.protocol.world.BlockFace;
 import com.github.retrooper.packetevents.util.Vector3i;
 import com.github.retrooper.packetevents.wrapper.play.client.WrapperPlayClientPlayerBlockPlacement;
+import it.creeper.roman.Roman;
 import it.creeper.roman.check.Check;
 import it.creeper.roman.check.CheckInfo;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
@@ -36,7 +38,9 @@ public class ScaffoldB extends Check implements PacketListener {
                         if(ticks < minimumTicks && rightClicksBeforePlace == 0) {
                             if(++streak >= 10) {
                                 fail(player, getCheckName(this.getClass()), getCheckType(this.getClass()), "Perfect rightclick streak:"+streak);
-                                possiblyKickPlayer(player);
+                                //possiblyKickPlayer(player);
+                                //possiblyPunish(player, this.getClass());
+                                Bukkit.getScheduler().runTask(Roman.getInstance(), () -> possiblyPunish(player, this.getClass()));
                             }
                         } else {
                             streak = 0;
