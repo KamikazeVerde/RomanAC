@@ -1,6 +1,7 @@
 # Roman AntiCheat
 ## Plugin that blocks cheaters from using modified software to gain unfair advantages
-### This plugin is still under construction, please don't use it on your server, but feel free to fork or create a pull request to this repository
+### Completely community driven project, https://discord.gg/MKwUPyawFr
+#### Please don't use this plugin for your server, this is still under construction and has several problems.
 
 TODO LIST:
 - Checks
