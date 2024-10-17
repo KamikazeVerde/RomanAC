@@ -28,6 +28,7 @@ checks:
   scaffold:
     a: true
     b: true
+    c: true
     punishment: "kick"
   test-1: false
   test-2: false

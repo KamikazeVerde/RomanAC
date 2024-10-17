@@ -6,7 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 
-@CheckInfo(name = "FakeGround", type = 'A', description = "Checks for ground spoofing")
+@CheckInfo(name = "Movement", type = 'A', description = "Checks for ground spoofing")
 public class FakeGround extends Check implements Listener {
     private int buff = 0;
     private static double groundY = 1 / 64.;

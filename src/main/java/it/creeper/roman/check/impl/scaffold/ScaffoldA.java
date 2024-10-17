@@ -17,7 +17,7 @@ import java.util.Map;
 @CheckInfo(name="Scaffold", type='A', description="Checks for impossible godbridge style scaffold")
 public class ScaffoldA extends Check implements Listener {
     Roman plugin = Roman.getInstance();
-    Data data = plugin.getData();
+    //Data data = plugin.getData();
     Map<Player, Integer> blockCount = new HashMap<>();
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent e) {
@@ -25,16 +25,16 @@ public class ScaffoldA extends Check implements Listener {
         Location loc = cheater.getLocation();
         double pitch = loc.getPitch();
 
-        if(!(data.deltasXZ.get(cheater) > 0.215) || !(data.deltasXZ.get(cheater) < 0.285)) {
+        if(!(playerData.deltasXZ.get(cheater) > 0.215) || !(playerData.deltasXZ.get(cheater) < 0.285)) {
             return;
         }
         this.blockCount.put(cheater, this.blockCount.getOrDefault(cheater, 0)+1);
-        if(!data.isOnGround(cheater) && !(cheater.isSneaking()) && pitch > 0 &&  pitch < 68 || cheater.isSneaking() && data.isOnGround(cheater) && pitch > 70 && pitch < 88) {
+        if(!playerData.isOnGround(cheater) && !(cheater.isSneaking()) && pitch > 0 &&  pitch < 68 || cheater.isSneaking() && playerData.isOnGround(cheater) && pitch > 70 && pitch < 88) {
             this.blockCount.remove(cheater);
             return;
         }
         //System.out.println("Statement 1");
-        if(data.jumpingPlayers.contains(cheater)) {
+        if(playerData.jumpingPlayers.contains(cheater)) {
             if(this.blockCount.get(cheater) == null) {
                 //System.out.println("Statement 1.2");
                 return;
@@ -46,13 +46,14 @@ public class ScaffoldA extends Check implements Listener {
                 this.blockCount.remove(cheater);
                 return;
             }
+            return;
         }
         if(this.blockCount.get(cheater) == null) {
             //System.out.println("Statement 1.2");
             return;
         }
         //System.out.println("Statement 2");
-        if(this.blockCount.get(cheater) >= 10 && data.isOnGround(cheater) && !(cheater.isSneaking()) && pitch > 70 && pitch  < 88) {
+        if(this.blockCount.get(cheater) >= 10 && playerData.isOnGround(cheater) && !(cheater.isSneaking()) && pitch > 70 && pitch  < 88) {
             //System.out.println("Cheating Scaffold");
             fail(cheater, getCheckName(this.getClass()), getCheckType(this.getClass()), "count=" + this.blockCount.get(cheater));
             //possiblyKickPlayer(cheater);

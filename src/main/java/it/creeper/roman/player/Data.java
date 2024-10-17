@@ -35,7 +35,6 @@ public class Data implements Listener {
         if(player.getLocation().getY() > 0 && !isOnGround(player)) {
             jumpingPlayers.add(player);
         } else {
-
             jumpingPlayers.remove(player);
         }
     }
