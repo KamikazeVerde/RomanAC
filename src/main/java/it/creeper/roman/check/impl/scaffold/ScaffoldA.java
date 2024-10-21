@@ -16,7 +16,7 @@ import java.util.Map;
 
 @CheckInfo(name="Scaffold", type='A', description="Checks for impossible godbridge style scaffold")
 public class ScaffoldA extends Check implements Listener {
-    Roman plugin = Roman.getInstance();
+
     //Data data = plugin.getData();
     Map<Player, Integer> blockCount = new HashMap<>();
     @EventHandler

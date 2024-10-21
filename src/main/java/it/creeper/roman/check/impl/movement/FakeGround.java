@@ -12,6 +12,8 @@ public class FakeGround extends Check implements Listener {
     private static double groundY = 1 / 64.;
     public boolean lastServerGround = true;
 
+
+
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent e) {
         boolean localGround = e.getPlayer().isOnGround();

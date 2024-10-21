@@ -8,6 +8,7 @@ import it.creeper.roman.check.impl.movement.FakeGround;
 import it.creeper.roman.check.impl.scaffold.ScaffoldA;
 import it.creeper.roman.check.impl.scaffold.ScaffoldB;
 import it.creeper.roman.check.impl.scaffold.ScaffoldC;
+import it.creeper.roman.check.impl.scaffold.ScaffoldD;
 import it.creeper.roman.check.impl.test.TestCheck;
 import it.creeper.roman.check.impl.test.TestCheck2;
 
@@ -21,6 +22,7 @@ public class Register {
     boolean scaffold_a = plugin.getConfig().getBoolean("checks.scaffold.a");
     boolean scaffold_b = plugin.getConfig().getBoolean("checks.scaffold.b");
     boolean scaffold_c = plugin.getConfig().getBoolean("checks.scaffold.c");
+    boolean scaffold_d = plugin.getConfig().getBoolean("checks.scaffold.d");
     public void registerChecks() {
         if(test1) {
             plugin.getServer().getPluginManager().registerEvents(new TestCheck(), plugin);
@@ -43,5 +45,9 @@ public class Register {
         if(scaffold_c) {
             plugin.getServer().getPluginManager().registerEvents(new ScaffoldC(), plugin);
         }
+        if(scaffold_d) {
+            PacketEvents.getAPI().getEventManager().registerListener(new ScaffoldD(), PacketListenerPriority.LOW);
+        }
+        //plugin.getServer().getPluginManager().registerEvents(new ScaffoldD(), plugin);
     }
 }

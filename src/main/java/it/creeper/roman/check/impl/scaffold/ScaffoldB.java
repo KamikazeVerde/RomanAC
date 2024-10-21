@@ -20,6 +20,9 @@ public class ScaffoldB extends Check implements PacketListener {
     private int rightClicksBeforePlace;
     private int streak;
 
+
+    // Credits to Overblurred for making a tutorial for this check.
+
     @Override
     public void onPacketReceive(PacketReceiveEvent e) {
         if(e.getPacketType() == PacketType.Play.Client.PLAYER_BLOCK_PLACEMENT) {

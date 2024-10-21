@@ -50,6 +50,10 @@ public class MainCommand implements CommandExecutor {
                         }
                     }
                 }
+            } else if (args[0].equalsIgnoreCase("setback")) {
+                if(args.length == 1) {
+                    plugin.getSetback().setbackPlayer(Bukkit.getPlayer(args[1]));
+                }
             }
         }
         return false;

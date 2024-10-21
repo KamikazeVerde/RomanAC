@@ -8,12 +8,17 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 public class CheatNotify {
     Roman plugin = Roman.getInstance();
+
+
     public int VL_TO_ALERT = plugin.getConfig().getInt("violation-settings.alert-vl");
     public String ALERT_PREFIX = plugin.getConfig().getString("messages.prefix");
     public String ALERT_MESSAGE = plugin.getConfig().getString("messages.alert-message");
@@ -36,6 +41,7 @@ public class CheatNotify {
             //Bukkit.broadcast(ChatColor.translateAlternateColorCodes('&', ALERT_PREFIX + " "+"&6"+ cheater.getName() + " &r&7potrebbe star utilizzando &2&l"+check+" &r&7VL: " + vl.get(cheater)), "roman.notify");
             Bukkit.broadcast(ChatColor.translateAlternateColorCodes('&', ALERT_PREFIX + " "+ALERT_MESSAGE+" &7"+debug), "roman.notify");
             ALERT_MESSAGE = plugin.getConfig().getString("messages.alert-message");
+
         }
     }
 }
