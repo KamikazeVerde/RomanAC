@@ -8,12 +8,15 @@ import it.creeper.roman.notify.CheatNotify;
 import it.creeper.roman.notify.Placeholders;
 import it.creeper.roman.player.Ban;
 import it.creeper.roman.player.Data;
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+@Getter
 public final class Roman extends JavaPlugin {
+    @Getter
     private static Roman instance;
     private Setback setback;
     public CheatNotify cheatNotify;
@@ -21,9 +24,11 @@ public final class Roman extends JavaPlugin {
     public Register checkRegister;
     public Mathemathics math;
     public Data data;
+
     public static Long minToTick(long min) {
         return min * 60 * 20;
     }
+
     public void onEnable() {
         instance = this;
         getConfig().options().copyDefaults(true);
@@ -69,29 +74,5 @@ public final class Roman extends JavaPlugin {
 
     public void onDisable() {
         getLogger().info("Shutting down Roman AntiCheat by Creeper215 :(");
-    }
-
-    // GETTER
-
-    public static Roman getInstance() {
-        return instance;
-    }
-
-    public Setback getSetback() {
-        return setback;
-    }
-
-    public CheatNotify getCheatNotify() {
-        return cheatNotify;
-    }
-
-    public Data getData() { return data; }
-
-    public Ban getBanManager() {
-        return this.banManager;
-    }
-
-    public Mathemathics getMath() {
-        return math;
     }
 }
