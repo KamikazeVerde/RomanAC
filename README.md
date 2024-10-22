@@ -1,9 +1,11 @@
 # Roman AntiCheat
-## Plugin that blocks cheaters from using modified software to gain unfair advantages
-### Completely community driven project, https://discord.gg/MKwUPyawFr
-#### Please don't use this plugin for your server, this is still under construction and has several problems.
+[![Discord](https://img.shields.io/discord/1295390200826167356)](https://discord.gg/c5SVxD76Wb)
+![GitHub Release](https://img.shields.io/github/v/release/KamikazeVerde/RomanAC)
 
-TODO LIST:
-- Checks
-- Aura Bot
-- Various Utilities
+Roman Anticheat prevents players from using cheats that allows them to have unfain advantages. \
+This project is open-source and community-driven.
+
+## Todo
+- [ ] Checks
+- [ ] Aura Bot
+- [ ] Various Utilities
