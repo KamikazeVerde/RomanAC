@@ -8,13 +8,23 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class Check {
+
+
+
     public Roman plugin = Roman.getInstance();
     public Mathemathics mathemathics = new Mathemathics();
-    CheatNotify cheatNotify = plugin.getCheatNotify();
+    public CheatNotify cheatNotify = plugin.getCheatNotify();
     public Data playerData = plugin.getData();
+
+    /*
     public void fail(Player cheater, String check, char type, String debug) {
         cheatNotify.fail(cheater, check, type, debug);
     }
+
+     */
+
+
+
     public void possiblyBanPlayer(Player cheater) {
         plugin.getBanManager().banPlayer(cheater);
     }
@@ -51,4 +61,15 @@ public class Check {
 
 
     }
+/*
+    public enum Category {
+        MOVEMENT,
+        COMBAT,
+        MISC,
+        SCAFFOLD,
+        TEST,
+        PLAYER
+    }
+
+ */
 }

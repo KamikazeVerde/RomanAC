@@ -8,15 +8,15 @@ import it.creeper.roman.notify.CheatNotify;
 import it.creeper.roman.notify.Placeholders;
 import it.creeper.roman.player.Ban;
 import it.creeper.roman.player.Data;
-import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-@Getter
+import java.util.HashMap;
+import java.util.Map;
+
 public final class Roman extends JavaPlugin {
-    @Getter
     private static Roman instance;
     private Setback setback;
     public CheatNotify cheatNotify;
@@ -24,11 +24,10 @@ public final class Roman extends JavaPlugin {
     public Register checkRegister;
     public Mathemathics math;
     public Data data;
-
+    public Map<Player, Boolean> hittedPlayers = new HashMap<>();
     public static Long minToTick(long min) {
         return min * 60 * 20;
     }
-
     public void onEnable() {
         instance = this;
         getConfig().options().copyDefaults(true);
@@ -46,6 +45,7 @@ public final class Roman extends JavaPlugin {
         this.checkRegister = new Register();
         this.data = new Data();
         data.server.getPluginManager().registerEvents(getData(), this);
+        //getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         //getServer().getPluginManager().registerEvents(new Data(), this);
         // Check registering
         this.checkRegister.registerChecks();
@@ -64,15 +64,45 @@ public final class Roman extends JavaPlugin {
             while(this.isEnabled()) {
                 for(Player player : getServer().getOnlinePlayers()) {
                     this.setback.updatePlayerPos(player, player.getLocation());
-                }
-                //System.out.println("deltaXZ from Plugin class: "+data.deltasXZ.get(Bukkit.getPlayer("KanYeWeSt")));
+                } //System.out.println("deltaXZ from Plugin class: "+data.deltasXZ.get(Bukkit.getPlayer("KanYeWeSt")));
             }
         }, 1L);
+        /*
+        this.getServer().getScheduler().runTaskTimerAsynchronously(this, () -> {
+
+        }, 1L, 1L);
+
+         */
+
 
     }
 
 
     public void onDisable() {
         getLogger().info("Shutting down Roman AntiCheat by Creeper215 :(");
+    }
+
+    // GETTER
+
+    public static Roman getInstance() {
+        return instance;
+    }
+
+    public Setback getSetback() {
+        return setback;
+    }
+
+    public CheatNotify getCheatNotify() {
+        return cheatNotify;
+    }
+
+    public Data getData() { return data; }
+
+    public Ban getBanManager() {
+        return this.banManager;
+    }
+
+    public Mathemathics getMath() {
+        return math;
     }
 }

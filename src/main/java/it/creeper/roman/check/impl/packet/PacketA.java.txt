@@ -1,0 +1,23 @@
+package it.creeper.roman.check.impl.packet;
+
+import com.github.retrooper.packetevents.event.PacketListener;
+import com.github.retrooper.packetevents.event.PacketReceiveEvent;
+import com.github.retrooper.packetevents.event.PacketSendEvent;
+import com.github.retrooper.packetevents.protocol.packettype.PacketType;
+import com.github.retrooper.packetevents.wrapper.play.client.WrapperPlayClientInteractEntity;
+import com.github.retrooper.packetevents.wrapper.play.server.WrapperPlayServerUpdateHealth;
+import io.github.retrooper.packetevents.util.SpigotConversionUtil;
+import it.creeper.roman.check.Check;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
+
+@Deprecated
+public class PacketA extends Check implements PacketListener {
+    @Override
+    public void onPacketReceive(PacketReceiveEvent e) {
+        Player player = e.getPlayer();
+        if(!(e.getPacketType() == PacketType.Play.Client.PLAYER_FLYING) && player.isFlying()) {
+            player.sendMessage("flya");
+        }
+    }
+}

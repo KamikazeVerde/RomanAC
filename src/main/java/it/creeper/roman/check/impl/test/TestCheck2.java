@@ -10,7 +10,8 @@ import org.bukkit.event.player.PlayerMoveEvent;
 public class TestCheck2 extends Check implements Listener {
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent e) {
-        fail(e.getPlayer(), getCheckName(this.getClass()), getCheckType(this.getClass()), "test2" + "");
+        cheatNotify.fail(e.getPlayer());
+        //fail(e.getPlayer(), getCheckName(this.getClass()), getCheckType(this.getClass()), "test2" + "");
         possiblyBanPlayer(e.getPlayer());
     }
 }

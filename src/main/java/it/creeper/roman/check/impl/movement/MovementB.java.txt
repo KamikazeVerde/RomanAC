@@ -1,0 +1,54 @@
+package it.creeper.roman.check.impl.movement;
+
+import com.avaje.ebeaninternal.server.cluster.Packet;
+import com.github.retrooper.packetevents.event.PacketListener;
+import com.github.retrooper.packetevents.event.PacketReceiveEvent;
+import com.github.retrooper.packetevents.event.PacketSendEvent;
+import com.github.retrooper.packetevents.protocol.packettype.PacketType;
+import com.github.retrooper.packetevents.util.Vector3d;
+import com.github.retrooper.packetevents.wrapper.play.server.WrapperPlayServerEntityVelocity;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+
+import java.util.Vector;
+
+@Deprecated
+public class MovementB implements PacketListener {
+    double jumpUpwardsMotion = 0.41999998688697815;
+    double standardMotionY = -0.0784000015258789;
+    double pY, lastPlayerY;
+    @Override
+    public void onPacketSend(PacketSendEvent e) {
+        Player player = e.getPlayer();
+        double svelY, svelX, svelZ;
+        double clientY, clientX, clientZ;
+        //Vector3d serverVelocity;
+        if(e.getPacketType() == PacketType.Play.Server.ENTITY_VELOCITY) {
+            pY = player.getLocation().getY();
+
+            WrapperPlayServerEntityVelocity packet = new WrapperPlayServerEntityVelocity(e);
+            if(!(player.getEntityId() == packet.getEntityId())) return;
+            //lastPlayerY = pY;
+            //pY = player.getLocation().getY();
+            player.sendMessage(lastPlayerY + " " + pY);
+            double deltaY = lastPlayerY - pY;
+            svelY = packet.getVelocity().getY(); svelX = packet.getVelocity().getY(); svelZ = packet.getVelocity().getZ();
+            clientY = player.getVelocity().getY(); clientX = player.getVelocity().getX(); clientZ = player.getVelocity().getZ();
+            //Vector<Double> clientVel = null, serverVel = null;
+            //player.sendMessage(svelY + " " + svelX + " " + svelZ + " " + clientY + " " + clientX + " " + clientZ);
+            //clientVel.add(clientY); clientVel.add(clientX); clientVel.add(clientZ); serverVel.add(svelY); serverVel.add(svelX); serverVel.add(svelZ);
+            if(svelY != deltaY|| svelX != clientX || svelZ != clientZ) {
+                player.sendMessage(svelY + " " + svelX + " " + svelZ + " " + deltaY + " " + clientX + " " + clientZ);
+            }
+            //clientVel.clear();
+            //serverVel.clear();
+        }
+    }
+    @Override
+    public void onPacketReceive(PacketReceiveEvent e) {
+        Player player = e.getPlayer();
+        if(e.getPacketType() == PacketType.Play.Client.PLAYER_FLYING) {
+            lastPlayerY = pY;
+        }
+    }
+}

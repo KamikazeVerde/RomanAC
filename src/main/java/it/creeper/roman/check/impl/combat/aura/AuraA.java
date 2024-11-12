@@ -18,7 +18,8 @@ public class AuraA extends Check implements PacketListener {
         if(event.getPacketType() == PacketType.Play.Client.INTERACT_ENTITY) {
             if(System.currentTimeMillis() - lastFlying > 2) {
                 delay = System.currentTimeMillis() - lastFlying;
-                fail(event.getPlayer(), getCheckName(this.getClass()), getCheckType(this.getClass()), "delay= "+delay);
+                cheatNotify.fail(event.getPlayer());
+                //fail(event.getPlayer(), getCheckName(this.getClass()), getCheckType(this.getClass()), "delay= "+delay);
                 possiblySetbackPlayer(event.getPlayer());
                 Bukkit.getScheduler().runTask(Roman.getInstance(), () -> possiblyPunish(event.getPlayer(), this.getClass()));
                 delay = 0;

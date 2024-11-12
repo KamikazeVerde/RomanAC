@@ -14,12 +14,15 @@ public class FakeGround extends Check implements Listener {
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent e) {
+
         boolean localGround = e.getPlayer().isOnGround();
         boolean serverGround = e.getTo().getY() % groundY < 0.0001;
         if(localGround != lastServerGround) {
             if(++buff > 1) {
-                fail(e.getPlayer(), getCheckName(this.getClass()), getCheckType(this.getClass()), "localGround=" + localGround + " serverGround="+lastServerGround);
+                cheatNotify.fail(e.getPlayer());
+                //fail(e.getPlayer(), getCheckName(this.getClass()), getCheckType(this.getClass()), "localGround=" + localGround + " serverGround="+lastServerGround);
                 possiblySetbackPlayer(e.getPlayer());
+                
                 //possiblyKickPlayer(e.getPlayer());
                 possiblyPunish(e.getPlayer(), this.getClass());
             }

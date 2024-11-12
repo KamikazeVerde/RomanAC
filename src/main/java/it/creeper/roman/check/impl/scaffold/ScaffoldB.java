@@ -20,6 +20,8 @@ public class ScaffoldB extends Check implements PacketListener {
     private int rightClicksBeforePlace;
     private int streak;
 
+    // Credits to Overblurred for making a tutorial for this check.
+
     @Override
     public void onPacketReceive(PacketReceiveEvent e) {
         if(e.getPacketType() == PacketType.Play.Client.PLAYER_BLOCK_PLACEMENT) {
@@ -37,7 +39,8 @@ public class ScaffoldB extends Check implements PacketListener {
                         int minimumTicks = player.isSneaking() ? 6 : 10;
                         if(ticks < minimumTicks && rightClicksBeforePlace == 0) {
                             if(++streak >= 10) {
-                                fail(player, getCheckName(this.getClass()), getCheckType(this.getClass()), "Perfect rightclick streak:"+streak);
+                                cheatNotify.fail(player);
+                                //fail(player, getCheckName(this.getClass()), getCheckType(this.getClass()), "Perfect rightclick streak:"+streak);
                                 //possiblyKickPlayer(player);
                                 //possiblyPunish(player, this.getClass());
                                 Bukkit.getScheduler().runTask(Roman.getInstance(), () -> possiblyPunish(player, this.getClass()));

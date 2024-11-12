@@ -13,10 +13,10 @@ import org.bukkit.event.block.BlockPlaceEvent;
 
 import java.util.HashMap;
 import java.util.Map;
-
+@Deprecated
 @CheckInfo(name="Scaffold", type='A', description="Checks for impossible godbridge style scaffold")
 public class ScaffoldA extends Check implements Listener {
-    Roman plugin = Roman.getInstance();
+
     //Data data = plugin.getData();
     Map<Player, Integer> blockCount = new HashMap<>();
     @EventHandler
@@ -52,10 +52,12 @@ public class ScaffoldA extends Check implements Listener {
             //System.out.println("Statement 1.2");
             return;
         }
+        // qua ci sta quello vecchio che avevo fatto io a luglio di maxblock
         //System.out.println("Statement 2");
         if(this.blockCount.get(cheater) >= 10 && playerData.isOnGround(cheater) && !(cheater.isSneaking()) && pitch > 70 && pitch  < 88) {
             //System.out.println("Cheating Scaffold");
-            fail(cheater, getCheckName(this.getClass()), getCheckType(this.getClass()), "count=" + this.blockCount.get(cheater));
+            cheatNotify.fail(cheater);
+            //fail(cheater, getCheckName(this.getClass()), getCheckType(this.getClass()), "count=" + this.blockCount.get(cheater));
             //possiblyKickPlayer(cheater);
             possiblyPunish(cheater, this.getClass());
         }

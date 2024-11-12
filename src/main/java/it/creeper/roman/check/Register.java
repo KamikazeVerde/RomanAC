@@ -5,9 +5,9 @@ import com.github.retrooper.packetevents.event.PacketListenerPriority;
 import it.creeper.roman.Roman;
 import it.creeper.roman.check.impl.combat.aura.AuraA;
 import it.creeper.roman.check.impl.movement.FakeGround;
-import it.creeper.roman.check.impl.scaffold.ScaffoldA;
-import it.creeper.roman.check.impl.scaffold.ScaffoldB;
-import it.creeper.roman.check.impl.scaffold.ScaffoldC;
+import it.creeper.roman.check.impl.movement.MovementA;
+import it.creeper.roman.check.impl.packet.PacketA;
+import it.creeper.roman.check.impl.scaffold.*;
 import it.creeper.roman.check.impl.test.TestCheck;
 import it.creeper.roman.check.impl.test.TestCheck2;
 
@@ -21,6 +21,7 @@ public class Register {
     boolean scaffold_a = plugin.getConfig().getBoolean("checks.scaffold.a");
     boolean scaffold_b = plugin.getConfig().getBoolean("checks.scaffold.b");
     boolean scaffold_c = plugin.getConfig().getBoolean("checks.scaffold.c");
+    boolean scaffold_d = plugin.getConfig().getBoolean("checks.scaffold.d");
     public void registerChecks() {
         if(test1) {
             plugin.getServer().getPluginManager().registerEvents(new TestCheck(), plugin);
@@ -35,7 +36,8 @@ public class Register {
             plugin.getServer().getPluginManager().registerEvents(new FakeGround(), plugin);
         }
         if(scaffold_a) {
-            plugin.getServer().getPluginManager().registerEvents(new ScaffoldA(), plugin);
+            PacketEvents.getAPI().getEventManager().registerListener(new ScaffoldF(), PacketListenerPriority.LOW);
+            //plugin.getServer().getPluginManager().registerEvents(new ScaffoldA(), plugin);
         }
         if(scaffold_b) {
             PacketEvents.getAPI().getEventManager().registerListener(new ScaffoldB(), PacketListenerPriority.LOW);
@@ -43,5 +45,15 @@ public class Register {
         if(scaffold_c) {
             plugin.getServer().getPluginManager().registerEvents(new ScaffoldC(), plugin);
         }
+        if(scaffold_d) {
+            PacketEvents.getAPI().getEventManager().registerListener(new ScaffoldD(), PacketListenerPriority.LOW);
+        }
+
+        //PacketEvents.getAPI().getEventManager().registerListener(new MovementA(), PacketListenerPriority.LOW);
+        //PacketEvents.getAPI().getEventManager().registerListener(new MovementA(), PacketListenerPriority.LOW);
+        //plugin.getServer().getPluginManager().registerEvents(new ScaffoldE(), plugin);
+       // plugin.getServer().getPluginManager().registerEvents(new HitHandler(), plugin);
+        //PacketEvents.getAPI().getEventManager().registerListener(new ScaffoldE(), PacketListenerPriority.LOW);
+        //plugin.getServer().getPluginManager().registerEvents(new ScaffoldD(), plugin);
     }
 }

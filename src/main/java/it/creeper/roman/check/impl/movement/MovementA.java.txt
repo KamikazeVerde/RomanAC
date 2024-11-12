@@ -1,0 +1,113 @@
+package it.creeper.roman.check.impl.movement;
+
+import com.avaje.ebeaninternal.server.cluster.Packet;
+import com.github.retrooper.packetevents.event.PacketHandler;
+import com.github.retrooper.packetevents.event.PacketListener;
+import com.github.retrooper.packetevents.event.PacketReceiveEvent;
+import com.github.retrooper.packetevents.protocol.packettype.PacketType;
+import com.github.retrooper.packetevents.wrapper.play.client.WrapperPlayClientInteractEntity;
+import it.creeper.roman.check.Check;
+import it.creeper.roman.check.CheckInfo;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.util.Vector;
+
+import java.util.HashMap;
+import java.util.Map;
+@Deprecated
+@CheckInfo(name = "Movement", type = 'A', description = "Test Prediction Check")
+public class MovementA extends Check implements PacketListener {
+    double jumpUpwardsMotion = 0.41999998688697815;
+    double standardMotionY = -0.0784000015258789;
+    double flyMotion = -0.5169479491049732;
+    int OGT = 0;
+    int ticksNoMotY;
+    double motionY;
+    double lastMotionY, predictedMotionY, Y, lastY = 0;
+
+    @Override
+    public void onPacketReceive(PacketReceiveEvent e) {
+        Player player = e.getPlayer();
+        if(e.getPacketType() == PacketType.Play.Client.PLAYER_FLYING) {
+            Y = player.getLocation().getY();
+            motionY = lastY - Y;
+
+            //motionY = player.getVelocity().getY();
+        }
+        if(!playerData.isOnGround(player)) OGT++;
+        //if(e.getPacketType() == PacketType.Play.Client.PLAYER_FLYING && !playerData.isOnGround(e.getPlayer())) OGT++;
+        if(OGT >= 2) {
+            //System.out.println(motionY + " OGT 2");
+            lastY = Y;
+            //Y = lastY;
+            lastMotionY = motionY;
+            predictedMotionY = lastMotionY;
+            predictedMotionY -= 0.08;
+            predictedMotionY *= 0.9800000190734863;
+            motionY = lastY - player.getLocation().getY();
+            if(Math.abs(predictedMotionY) < 0.005) {
+                predictedMotionY = 0;
+            }
+
+            if(motionY == 0 && ++ticksNoMotY <= 2) {
+                ticksNoMotY = 0;
+                return;
+            }
+
+
+
+            //if(latMotY == standardMotionY || latMotY == -0.30431682745754424 || latMotY == -0.37663049823865513 || latMotY == -0.230527368912964 || latMotY == -0.1552320045166016 || latMotY == -0.44749789698341763 || latMotY == 0.0030162615090425808 || latMotY == -0.5169479491049732 || !isPlayerFalling(player)) return;
+
+
+            //player.sendMessage("MOtionY: " + motionY + " lastmotionY: " + predictedMotionY + "  + 1e-14: " + predictedMotionY + 1E-14);
+            if(motionY > predictedMotionY) {
+                //System.out.println("MOtionY: " + latMotY + " lastmotionY: " + predictedMotionY + "  + 1e-14: " + predictedMotionY + 1E-14);
+                player.sendMessage("motionY smettila di falsaare: " + motionY + " lastmotionY: " + predictedMotionY + "  + 1e-14: " + predictedMotionY + 1E-14);
+            }
+            OGT = 0;
+        }
+        /*
+        Player player = e.getPlayer();
+        System.out.println(player.getVelocity().getZ());
+        if(e.getPacketType() == PacketType.Play.Server.DAMAGE_EVENT) {
+            WrapperPlayClientInteractEntity packet = new WrapperPlayClientInteractEntity(e);
+            packet.getEntityId();
+        }
+        if(player.getVelocity().getY() == jumpUpwardsMotion) {
+            player.sendMessage(String.valueOf(player.getVelocity().getY()));
+            player.sendMessage("Jump");
+            fail(player, getCheckName(this.getClass()), getCheckType(this.getClass()), "PLAYER JUMP");
+        }
+        if(plugin.hittedPlayers.get(player) != null && player.getVelocity().getY() != jumpUpwardsMotion) {
+            plugin.hittedPlayers.remove(player);
+            plugin.hittedPlayers.clear();
+            player.sendMessage("NO KNOCKBACK");
+        }
+            /*
+            player.sendMessage("Y VEL: " + player.getVelocity().getY());
+            player.sendMessage("X VEL: " + player.getVelocity().getX());
+            player.sendMessage("Z VEL: " + player.getVelocity().getZ());
+
+             */
+
+        //System.out.println(String.valueOf(player.getVelocity().getY()));
+        //player.sendMessage(String.valueOf(player.getVelocity().getY()));
+        /*
+        if(e.getPacketType() == PacketType.Play.Client.PLAYER_FLYING) {
+            player.sendMessage("Jump");
+            if(player.getVelocity().getY() == jumpUpwardsMotion) {
+                fail(player, getCheckName(this.getClass()), getCheckType(this.getClass()), "PLAYER JUMP");
+            }
+        }
+
+         */
+    }
+
+    public boolean isPlayerFalling(Player player) {
+
+        Vector velocity = player.getVelocity();
+
+        return velocity.getY() < 0 && !playerData.isOnGround(player) && !player.isFlying();
+    }
+
+}

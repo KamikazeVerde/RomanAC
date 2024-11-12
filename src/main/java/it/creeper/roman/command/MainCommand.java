@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 
 public class MainCommand implements CommandExecutor {
     Roman plugin = Roman.getInstance();
+
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
         if(!(commandSender instanceof Player)) {
@@ -23,6 +24,7 @@ public class MainCommand implements CommandExecutor {
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', "GitHub: &bgithub.com/KamikazeVerde/RomanAC"));
         } else if (player.hasPermission("roman.main") && player.hasPermission("roman.notify")) {
             if(args.length == 0) {
+
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&',"&4★ Roman&6AC &7by &aCreeper&2215"));
                 player.sendMessage(ChatColor.BLUE + "- /roman player [vl {playername}]");
                 return false;
@@ -47,6 +49,19 @@ public class MainCommand implements CommandExecutor {
                             int PLAYER_VL = plugin.getCheatNotify().vl.get(playerinfo);
                             player.sendMessage(ChatColor.GREEN + "VL Info for "+playerinfo.getName()+ChatColor.AQUA + " | VL: " + ChatColor.GOLD + PLAYER_VL + ChatColor.AQUA +" Setback Value: " + ChatColor.GOLD + PLAYER_VL/10);
                             return true;
+                        }
+                    }
+                }
+            } else if (args[0].equalsIgnoreCase("setback")) {
+                if(args.length == 1) {
+                    plugin.getSetback().setbackPlayer(Bukkit.getPlayer(args[1]));
+                }
+            } else if (args[0].equalsIgnoreCase("change")) {
+                if(args.length == 1) {
+                    if(args[1].equalsIgnoreCase("maxblock")) {
+                        if(args.length == 2) {
+                            plugin.data.maxblockscaffold = Integer.parseInt(args[2]);
+                            player.sendMessage("Limite scaffold impostato a " + plugin.data.maxblockscaffold);
                         }
                     }
                 }
