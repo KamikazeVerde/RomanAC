@@ -76,7 +76,7 @@ public class CheatNotify {
                     ALERT_MESSAGE = plugin.getConfig().getString("messages.alert-message");
                 }
             } else {
-                System.out.println("Nessuna annotazione MyAnnotation trovata sulla classe chiamante.");
+                System.out.println("// FAIL //");
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
