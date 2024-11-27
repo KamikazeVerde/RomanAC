@@ -25,7 +25,7 @@ public final class Roman extends JavaPlugin {
     public Mathemathics math;
     public Data data;
     public Map<Player, Boolean> hittedPlayers = new HashMap<>();
-    public static Long minToTick(long min) {
+    public static long minToTick(long min) {
         return min * 60 * 20;
     }
     public void onEnable() {
@@ -105,4 +105,5 @@ public final class Roman extends JavaPlugin {
     public Mathemathics getMath() {
         return math;
     }
+
 }

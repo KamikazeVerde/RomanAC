@@ -3,12 +3,12 @@ package it.creeper.roman.notify;
 import it.creeper.roman.Roman;
 import it.creeper.roman.check.CheckInfo;
 import me.clip.placeholderapi.PlaceholderAPI;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.Server;
+import me.micartey.webhookly.DiscordWebhook;
+import me.micartey.webhookly.embeds.EmbedObject;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 
+import java.awt.Color;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -74,11 +74,26 @@ public class CheatNotify {
                     //Bukkit.broadcast(ChatColor.translateAlternateColorCodes('&', ALERT_PREFIX + " "+"&6"+ cheater.getName() + " &r&7potrebbe star utilizzando &2&l"+check+" &r&7VL: " + vl.get(cheater)), "roman.notify");
                     Bukkit.broadcast(ChatColor.translateAlternateColorCodes('&', ALERT_PREFIX + " " + ALERT_MESSAGE + " &7" + Arrays.toString(debug)), "roman.notify");
                     ALERT_MESSAGE = plugin.getConfig().getString("messages.alert-message");
+
+                    // webhook discord
+
+                    DiscordWebhook webhook = new DiscordWebhook(plugin.getConfig().getString("discord.webhook-url"));
+                    webhook.setAvatarUrl(plugin.getConfig().getString("discord.webhook-avatar"));
+                    webhook.setUsername(plugin.getConfig().getString("discord.webhook-username"));
+
+                    EmbedObject embed = new EmbedObject()
+                            .setTitle(plugin.getConfig().getString("discord.embed-title"))
+                            .setColor(new Color(255, 0 ,0))
+                            .setDescription(ALERT_MESSAGE);
+
+                    webhook.getEmbeds().add(embed);
+                    webhook.execute();
+
                 }
             } else {
                 System.out.println("// FAIL //");
             }
-        } catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();
         }
     }
