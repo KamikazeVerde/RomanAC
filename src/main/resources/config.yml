@@ -33,3 +33,11 @@ checks:
     punishment: "kick"
   test-1: false
   test-2: false
+
+
+discord:
+  webhook-url: ""
+  webhook-avatar: ""
+  webhook-username: ""
+  # now we do the embed
+  embed-title: ""
