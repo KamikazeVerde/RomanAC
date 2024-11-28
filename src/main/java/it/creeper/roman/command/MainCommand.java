@@ -65,6 +65,14 @@ public class MainCommand implements CommandExecutor {
                         }
                     }
                 }
+            } else if (args[0].equalsIgnoreCase("notify")) {
+                if(!plugin.cheatNotify.subscribed.contains(player)) {
+                    plugin.cheatNotify.subscribed.add(player);
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.subscribed")));
+                } else if (plugin.cheatNotify.subscribed.contains(player)) {
+                    plugin.cheatNotify.subscribed.remove(player);
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.unsubscribed")));
+                }
             }
         }
         return false;

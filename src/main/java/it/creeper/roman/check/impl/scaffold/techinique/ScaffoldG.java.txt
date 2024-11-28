@@ -1,0 +1,71 @@
+package it.creeper.roman.check.impl.scaffold.techinique;
+
+import com.github.retrooper.packetevents.event.PacketListener;
+import com.github.retrooper.packetevents.event.PacketReceiveEvent;
+import com.github.retrooper.packetevents.protocol.packettype.PacketType;
+import it.creeper.roman.check.Check;
+import it.creeper.roman.check.CheckInfo;
+import it.creeper.roman.check.NewRegister;
+import it.creeper.roman.check.annotations.PacketCheck;
+import org.bukkit.entity.Player;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@PacketCheck
+@CheckInfo(name = "Scaffold", type = 'G', description = "No vabbe ")
+public class ScaffoldG extends Check implements PacketListener {
+
+    //TESTING
+
+    NewRegister register = plugin.newCheckRegister;
+
+    //ScaffoldGRecorder recorder = (ScaffoldGRecorder) register.recorderA.get(0);
+    ScaffoldGRecorder recorder = register.scaffoldGRecorder;
+    int ticks, clicks, placeClicks;
+    List<Integer> recordedCPSnoPlace = new ArrayList<>();
+    List<Integer> recorderCPSplace = new ArrayList<>();
+    int avgNormal, avgPlace, diff;
+    @Override
+    public void onPacketReceive(PacketReceiveEvent e) {
+        System.out.println("ciao");
+        Player player = e.getPlayer();
+        if(e.getPacketType() == PacketType.Play.Client.PLAYER_FLYING) {
+            if(++ticks >= 20) {
+                if(clicks >= 20) {
+                    recorderCPSplace.add(clicks);
+                    if(recorder.place) {
+                        recordedCPSnoPlace.add(clicks);
+                        placeClicks = clicks;
+                    }
+
+                    avgNormal = calculateAverage(recordedCPSnoPlace);
+                    avgPlace = calculateAverage(recorderCPSplace);
+                    diff = avgNormal - avgPlace;
+
+                    player.sendMessage("Block CPS: " + placeClicks + " Right CPS: " + clicks + " Diff: " + diff);
+
+                    clicks = 0;
+                    ticks = 0;
+                }
+                avgNormal = calculateAverage(recordedCPSnoPlace);
+                avgPlace = calculateAverage(recorderCPSplace);
+                diff = avgNormal - avgPlace;
+                clicks = 0;
+                ticks = 0;
+                player.sendMessage("Block CPS: " + placeClicks + " Right CPS: " + clicks + " Diff: " + diff);
+            }
+        } else if(e.getPacketType() == PacketType.Play.Client.PLAYER_BLOCK_PLACEMENT) {
+            clicks++;
+        } else {
+            recorder.place = false;
+        }
+    }
+
+    private int calculateAverage(List <Integer> marks) {
+        return (int) marks.stream()
+                .mapToDouble(d -> d)
+                .average()
+                .orElse(0.0);
+    }
+}

@@ -9,10 +9,12 @@ import com.github.retrooper.packetevents.wrapper.play.client.WrapperPlayClientPl
 import it.creeper.roman.Roman;
 import it.creeper.roman.check.Check;
 import it.creeper.roman.check.CheckInfo;
+import it.creeper.roman.check.annotations.PacketCheck;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
+@PacketCheck
 @CheckInfo(name = "Scaffold", type = 'B', description = "Checks for single clicking bridge (Heuristics)")
 public class ScaffoldB extends Check implements PacketListener {
     private WrapperPlayClientPlayerBlockPlacement lastPlacement;

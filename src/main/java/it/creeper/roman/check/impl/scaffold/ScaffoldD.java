@@ -7,12 +7,14 @@ import com.github.retrooper.packetevents.wrapper.play.client.WrapperPlayClientPl
 import it.creeper.roman.Roman;
 import it.creeper.roman.check.Check;
 import it.creeper.roman.check.CheckInfo;
+import it.creeper.roman.check.annotations.PacketCheck;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 
+@PacketCheck
 @CheckInfo(name = "Scaffold", type = 'D', description = "Checks for too much rotation change")
 public class ScaffoldD extends Check implements PacketListener {
     int ticks;
@@ -22,6 +24,9 @@ public class ScaffoldD extends Check implements PacketListener {
     float lastYaw;
     float diffP;
     float diffY;
+
+    WrapperPlayClientPlayerBlockPlacement lastPlacement;
+
     boolean isSnap(float pitch, float lastPitch) {
         if(Math.abs(pitch - lastPitch) >= 24) {
             return true;
@@ -35,23 +40,29 @@ public class ScaffoldD extends Check implements PacketListener {
         Player player = e.getPlayer();
         if(e.getPacketType() == PacketType.Play.Client.PLAYER_BLOCK_PLACEMENT) {
             WrapperPlayClientPlayerBlockPlacement packet = new WrapperPlayClientPlayerBlockPlacement(e);
+            if(player.getItemInHand().getType().isBlock()) {
+                if(lastPlacement != null) {
+                    ticks = 0;
+                    Location loc = player.getLocation();
+                    pitch = loc.getPitch();
+                    yaw = loc.getYaw();
+                    if(!(playerData.deltasXZ.get(player) > 0.215) || !(playerData.deltasXZ.get(player) < 0.285) || player.isSprinting() || !playerData.isOnGround(player)) {
+                        return;
+                    }
+                    if(ticks <= 20 && isSnap(pitch, lastPitch) && !player.isSneaking()) {
 
-            ticks = 0;
-            Location loc = player.getLocation();
-            pitch = loc.getPitch();
-            yaw = loc.getYaw();
-
-            if(ticks <= 20 && isSnap(pitch, lastPitch) && !player.isSneaking()) {
-
-                diffP = pitch - lastPitch;
-                diffY = yaw - lastYaw;
-                cheatNotify.fail(player);
-                //fail(player, getCheckName(this.getClass()), getCheckType(this.getClass()), "pitch diff:"+diffP+" yaw diff:"+diffY);
-            } else {
-                pitch = lastPitch;
-                yaw = lastPitch;
-                diffY = 0;
-                diffP = 0;
+                        diffP = pitch - lastPitch;
+                        diffY = yaw - lastYaw;
+                        cheatNotify.fail(player);
+                        //fail(player, getCheckName(this.getClass()), getCheckType(this.getClass()), "pitch diff:"+diffP+" yaw diff:"+diffY);
+                    } else {
+                        pitch = lastPitch;
+                        yaw = lastPitch;
+                        diffY = 0;
+                        diffP = 0;
+                    }
+                }
+                lastPlacement = packet;
             }
         }
         else if(e.getPacketType() == PacketType.Play.Client.PLAYER_FLYING) {

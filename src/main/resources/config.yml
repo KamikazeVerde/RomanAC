@@ -1,6 +1,7 @@
 # RomanAC Config
 # by Creeper215
 # IMPORTANT: vl-reset-time works by MINUTES
+# Punishments: "ban", "kick", "none"
 
 violation-settings:
   ban-vl: 60
@@ -17,6 +18,8 @@ messages:
   prefix: "&7[&4&lR★AC&7]"
   alert-message: "%player_name% potrebbe star utilizzando %roman_check% Type: %roman_type% VL: %roman_vl%"
   vl-reset-message: "&6Tutte le &aviolazioni&6 di tutti i &cgiocatori&6 sono state &bresettate"
+  subscribed: "&cYou are now subscribed to Roman alerts"
+  unsubscribed: "&cYou arent more subscribed to Roman alerts"
 
 checks:
   combat:
@@ -26,10 +29,10 @@ checks:
     groundspoof: true
     punishment: "ban"
   scaffold:
-    a: true
     b: true
     c: true
     d: true
+    f: true
     punishment: "kick"
   test-1: false
   test-2: false

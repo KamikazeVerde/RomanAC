@@ -2,6 +2,7 @@ package it.creeper.roman.notify;
 
 import it.creeper.roman.Roman;
 import it.creeper.roman.check.CheckInfo;
+import it.creeper.roman.events.FlagEvent;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -12,15 +13,12 @@ import org.bukkit.entity.Player;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class CheatNotify {
     Roman plugin = Roman.getInstance();
 
-
+    public ArrayList<Player> subscribed = new ArrayList<>();
     public int VL_TO_ALERT = plugin.getConfig().getInt("violation-settings.alert-vl");
     public String ALERT_PREFIX = plugin.getConfig().getString("messages.prefix");
     public String ALERT_MESSAGE = plugin.getConfig().getString("messages.alert-message");
@@ -49,6 +47,7 @@ public class CheatNotify {
     }
 
      */
+    /*
     public void fail(Player player, String... debug) {
         StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
 
@@ -76,7 +75,45 @@ public class CheatNotify {
                     ALERT_MESSAGE = plugin.getConfig().getString("messages.alert-message");
                 }
             } else {
-                System.out.println("Nessuna annotazione MyAnnotation trovata sulla classe chiamante.");
+                System.out.println("Nessuna annotazione per le informazioni del check.");
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+     */
+    public void fail(Player player, String... debug) {
+        StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
+
+        String callerClassName = stackTrace[2].getClassName();
+
+        try {
+
+            Class<?> callerClass = Class.forName(callerClassName);
+
+            if (callerClass.isAnnotationPresent(CheckInfo.class)) {
+                CheckInfo annotation = callerClass.getAnnotation(CheckInfo.class);
+                Bukkit.getPluginManager().callEvent(new FlagEvent(player, annotation.name(), annotation.type()));
+                //System.out.println("Il valore di 'name' del check: " + annotation.name());
+                currentPlayerCheck.put(player, annotation.name());
+                currentPlayerCheckType.put(player, annotation.type());
+                flagCount.put(player, flagCount.getOrDefault(player, 0) + 1);
+                if(flagCount.get(player) % VL_TO_ALERT == 0) {
+                    //ALERT_MESSAGE = PlaceholderAPI.setPlaceholders((OfflinePlayer) cheater, ALERT_MESSAGE);
+                    vl.put(player, vl.getOrDefault(player, 0) + flagCount.get(player));
+                    ALERT_MESSAGE = PlaceholderAPI.setPlaceholders(player, ALERT_MESSAGE);
+                    flagCount.replace(player, 0);
+                    //System.out.println("Funziona");
+                    //Bukkit.broadcast(ChatColor.translateAlternateColorCodes('&', ALERT_PREFIX + " "+"&6"+ cheater.getName() + " &r&7potrebbe star utilizzando &2&l"+check+" &r&7VL: " + vl.get(cheater)), "roman.notify");
+                    for(Player staff : subscribed) {
+                        staff.sendMessage(ChatColor.translateAlternateColorCodes('&', ALERT_PREFIX + " " + ALERT_MESSAGE + " &7" + Arrays.toString(debug)));
+                    }
+                    //Bukkit.broadcast(ChatColor.translateAlternateColorCodes('&', ALERT_PREFIX + " " + ALERT_MESSAGE + " &7" + Arrays.toString(debug)), "roman.notify");
+                    ALERT_MESSAGE = plugin.getConfig().getString("messages.alert-message");
+                }
+            } else {
+                System.out.println("FAIL CODE 01 [No CHECK INFO]");
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

@@ -1,6 +1,7 @@
 package it.creeper.roman.check;
 
 import it.creeper.roman.Roman;
+import it.creeper.roman.events.PunishEvent;
 import it.creeper.roman.math.Mathemathics;
 import it.creeper.roman.notify.CheatNotify;
 import it.creeper.roman.player.Data;
@@ -51,6 +52,7 @@ public class Check {
     public void possiblyPunish(Player player, Class<?> punishmentClass) {
         String checkName = getCheckName(punishmentClass);
         String punishment = plugin.getConfig().getString("checks."+checkName.toLowerCase()+".punishment");
+        Bukkit.getPluginManager().callEvent(new PunishEvent(player, punishment));
         if(punishment.equalsIgnoreCase("Kick")) {
             possiblyKickPlayer(player);
         } else if (punishment.equalsIgnoreCase("Ban")) {

@@ -1,6 +1,6 @@
 package it.creeper.roman;
 
-import it.creeper.roman.check.Register;
+import it.creeper.roman.check.NewRegister;
 import it.creeper.roman.command.MainCommand;
 import it.creeper.roman.math.Mathemathics;
 import it.creeper.roman.mitigation.Setback;
@@ -21,7 +21,7 @@ public final class Roman extends JavaPlugin {
     private Setback setback;
     public CheatNotify cheatNotify;
     public Ban banManager;
-    public Register checkRegister;
+    public NewRegister newCheckRegister;
     public Mathemathics math;
     public Data data;
     public Map<Player, Boolean> hittedPlayers = new HashMap<>();
@@ -42,13 +42,14 @@ public final class Roman extends JavaPlugin {
         this.cheatNotify = new CheatNotify();
         this.banManager = new Ban();
         this.setback = new Setback();
-        this.checkRegister = new Register();
+        this.newCheckRegister = new NewRegister();
         this.data = new Data();
         data.server.getPluginManager().registerEvents(getData(), this);
         //getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         //getServer().getPluginManager().registerEvents(new Data(), this);
         // Check registering
-        this.checkRegister.registerChecks();
+        this.newCheckRegister.registerModulesNew();
+        //this.checkRegister.registerChecks();
         getCommand("roman").setExecutor(new MainCommand());
         //this.getServer().getPluginManager().registerEvents(new TestCheck(), this);
         String VL_RESET_MESSAGE = getConfig().getString("messages.vl-reset-message");
