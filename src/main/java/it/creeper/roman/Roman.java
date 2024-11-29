@@ -1,5 +1,6 @@
 package it.creeper.roman;
 
+import it.creeper.roman.banwave.Banwave;
 import it.creeper.roman.check.NewRegister;
 import it.creeper.roman.command.MainCommand;
 import it.creeper.roman.math.Mathemathics;
@@ -24,6 +25,7 @@ public final class Roman extends JavaPlugin {
     public NewRegister newCheckRegister;
     public Mathemathics math;
     public Data data;
+    public Banwave banwave;
     public Map<Player, Boolean> hittedPlayers = new HashMap<>();
     public static Long minToTick(long min) {
         return min * 60 * 20;
@@ -44,6 +46,8 @@ public final class Roman extends JavaPlugin {
         this.setback = new Setback();
         this.newCheckRegister = new NewRegister();
         this.data = new Data();
+        this.banwave = new Banwave();
+        banwave.initBanwaveSystem();
         data.server.getPluginManager().registerEvents(getData(), this);
         //getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         //getServer().getPluginManager().registerEvents(new Data(), this);

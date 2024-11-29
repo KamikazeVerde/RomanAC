@@ -1,5 +1,6 @@
 package it.creeper.roman.events;
 
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
@@ -14,6 +15,8 @@ public class SetbackEvent extends Event {
     }
 
     public Player getPlayer() { return player; }
+
+    public Location getLocation() { return player.getLocation(); }
 
     public HandlerList getHandlers() {
         return handlers;

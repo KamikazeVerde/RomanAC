@@ -1,6 +1,6 @@
 # RomanAC Config
 # by Creeper215
-# IMPORTANT: vl-reset-time works by MINUTES
+# IMPORTANT: vl-reset-time works by MINUTES, same thing for banwave-time
 # Punishments: "ban", "kick", "none"
 
 violation-settings:
@@ -9,6 +9,11 @@ violation-settings:
   setback-vl: 3
   alert-vl: 10
   vl-reset-time: 1
+
+banwave-settings:
+  banwave-vl: 250
+  banwave-time: 1
+  banwave-type: "ban"
 
 punishments:
   ban-command: "ban %player_name% 30d"

@@ -26,11 +26,13 @@ public class ScaffoldC extends Check implements PacketListener {
     Roman plugin = Roman.getInstance();
     double Y = 0, lastY = 0;
     Map<Player, Integer> streak = new HashMap<>();
+    Map<Player, Boolean> flag = new HashMap<>();
     WrapperPlayClientPlayerBlockPlacement lastPlacement;
+    int buff;
     @Override
     public void onPacketReceive(PacketReceiveEvent e) {
+        Player player = e.getPlayer();
         if(e.getPacketType() == PacketType.Play.Client.PLAYER_BLOCK_PLACEMENT) {
-            Player player = e.getPlayer();
             double pitch = player.getLocation().getPitch();
             WrapperPlayClientPlayerBlockPlacement packet = new WrapperPlayClientPlayerBlockPlacement(e);
             Material heldMaterial = player.getItemInHand().getType();
@@ -47,12 +49,21 @@ public class ScaffoldC extends Check implements PacketListener {
                     if(streak.get(player) >= 3) {
                         if(!playerData.isOnGround(player) && !player.isSneaking() && lastY == Y && pitch > 70 && pitch < 88 && playerData.jumpingPlayers.contains(player)) {
                             //player.sendMessage("lastY: " + lastY + " Y: " +  Y);
-                            cheatNotify.fail(player, "samey checks");
+                            flag.put(player, true);
+                            //cheatNotify.fail(player, "samey checks");
                         }
                     }
                 }
             }
             lastPlacement = packet;
+            buff++;
+            if(buff > 10) {
+                if(flag.get(player) && playerData.getOffGroundTicks(player) >= 18) {
+                    cheatNotify.fail(player);
+                    flag.put(player, false);
+                }
+            }
         }
+
     }
 }

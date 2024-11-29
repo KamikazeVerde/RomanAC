@@ -19,9 +19,15 @@ public class Data implements Listener {
     //TODO: Player Data
     public Map<Player, Double> deltasXZ = new HashMap<>();
     public Set<Player> jumpingPlayers = new HashSet<>();
+    public Map<Player, Integer> offGroundTicks = new HashMap<>();
     double deltaXZ;
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent e) {
+        if(!this.isOnGround(e.getPlayer())) {
+            offGroundTicks.put(e.getPlayer(), offGroundTicks.getOrDefault(e.getPlayer(), 0) + 1);
+        } else if (this.isOnGround(e.getPlayer())) {
+            offGroundTicks.replace(e.getPlayer(), 0);
+        }
         //System.out.println("deltaXZ raccolto");
         Player player = e.getPlayer();
         Location from = e.getFrom();
@@ -43,6 +49,10 @@ public class Data implements Listener {
         Location loc = player.getLocation();
         loc.setY(loc.getY() - 0.1);
         return loc.getBlock().getType().isSolid();
+    }
+
+    public int getOffGroundTicks(Player player) {
+        return offGroundTicks.get(player);
     }
 
     public int maxblockscaffold = 8;

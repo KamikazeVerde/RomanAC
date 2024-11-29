@@ -16,6 +16,7 @@ it\creeper\roman\Roman.class
 it\creeper\roman\check\Check.class
 it\creeper\roman\events\SetbackEvent.class
 it\creeper\roman\events\FlagEvent.class
+it\creeper\roman\banwave\Banwave.class
 it\creeper\roman\notify\PlayerJoinUpdateNotify.class
 it\creeper\roman\check\impl\scaffold\ScaffoldD.class
 it\creeper\roman\check\impl\scaffold\techinique\ScaffoldGRecorder.class
