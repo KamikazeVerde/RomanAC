@@ -6,6 +6,7 @@ import com.github.retrooper.packetevents.event.PacketListenerPriority;
 import it.creeper.roman.Roman;
 import it.creeper.roman.check.annotations.PacketCheck;
 import it.creeper.roman.check.impl.combat.aura.AuraA;
+import it.creeper.roman.check.impl.combat.aura.AuraB;
 import it.creeper.roman.check.impl.movement.FakeGround;
 import it.creeper.roman.check.impl.scaffold.ScaffoldB;
 import it.creeper.roman.check.impl.scaffold.ScaffoldC;
@@ -17,6 +18,7 @@ import org.bukkit.event.Listener;
 import java.util.ArrayList;
 
 public class NewRegister {
+    public boolean aurab;
     Roman plugin = Roman.getInstance();
     ArrayList<Check> modules = new ArrayList<>();
     public ArrayList<Listener> recorderA = new ArrayList<>();
@@ -27,6 +29,7 @@ public class NewRegister {
         modules.add(new ScaffoldC());
         modules.add(new FakeGround());
         modules.add(new AuraA());
+        //modules.add(new AuraB());
 
         plugin.getServer().getPluginManager().registerEvents(new PlayerJoinUpdateNotify(), plugin);
 
@@ -46,6 +49,8 @@ public class NewRegister {
         }
 
           */
+
+        PacketEvents.getAPI().getEventManager().registerListener(new AuraB(), PacketListenerPriority.LOW);
 
 
 

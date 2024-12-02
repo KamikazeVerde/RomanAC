@@ -1,6 +1,7 @@
 package it.creeper.roman.mitigation;
 
 import it.creeper.roman.Roman;
+import it.creeper.roman.events.MitigateEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,7 +15,10 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Attack implements Listener {
+    // NEED TO FIX
     Roman plugin = Roman.getInstance();
+    int VL_TO_MITIGATE = plugin.getConfig().getInt("violation-settings.attack-mitigation-vl");
+    int REDUCE_DAMAGE_FACTOR = plugin.getConfig().getInt("mitigation.attack-reduce-factor");
     public void mitigatePlayer(int seconds,  Player player) {
         AtomicInteger ticks = new AtomicInteger();
         mitigatingPlayers.add(player);
@@ -34,10 +38,14 @@ public class Attack implements Listener {
         Need to get the player that got hitted from the listed cheater
         then diminsh the damage inflicted.
          */
-        assert event.getDamager() instanceof Player;
-        if(mitigatingPlayers.contains((Player) event.getDamager())) {
-            for(Player p : mitigatingPlayers) {
-                event.setDamage(event.getDamage() - 3);
+        if(event.getDamager() instanceof Player) {
+            if(plugin.getCheatNotify().vl.get((Player) event.getDamager()) != null) {
+                if(plugin.getCheatNotify().vl.get((Player) event.getEntity()) >= VL_TO_MITIGATE) {
+                    if(mitigatingPlayers.contains((Player) event.getDamager())) {
+                        Bukkit.getPluginManager().callEvent(new MitigateEvent((Player) event.getDamager(), "attack"));
+                        event.setDamage(event.getDamage() - REDUCE_DAMAGE_FACTOR);
+                    }
+                }
             }
         }
     }

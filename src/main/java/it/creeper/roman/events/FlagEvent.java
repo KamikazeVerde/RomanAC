@@ -1,6 +1,5 @@
 package it.creeper.roman.events;
 
-import jdk.nashorn.internal.objects.annotations.Getter;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;

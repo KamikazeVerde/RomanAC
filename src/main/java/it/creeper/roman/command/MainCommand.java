@@ -14,19 +14,24 @@ public class MainCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
         if(!(commandSender instanceof Player)) {
-            Bukkit.getLogger().info("This server is running Roman AntiCheat made by Creeper215 with <3");
+            Bukkit.getLogger().info("This server is running Roman AntiCheat made by Creeper215, a free and powerful AntiCheat Addition");
             Bukkit.getLogger().info("https://github.com/KamikazeVerde/RomanAC/");
             return true;
         }
         Player player = (Player) commandSender;
         if(!player.hasPermission("roman.main") || !player.hasPermission("roman.notify")) {
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4★ Roman&6AC &7by &aCreeper&2215"));
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4★ &7[&cAC&7] &r&7This server is running &4Roman&c AntiCheat&7 made by &6Creeper215"));
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', "GitHub: &bgithub.com/KamikazeVerde/RomanAC"));
         } else if (player.hasPermission("roman.main") && player.hasPermission("roman.notify")) {
             if(args.length == 0) {
 
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&',"&4★ Roman&6AC &7by &aCreeper&2215"));
-                player.sendMessage(ChatColor.BLUE + "- /roman player [vl {playername}]");
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', """
+                            &7[&cAC&7] &r&7This server is running &4Roman&c AntiCheat&7 made by &6Creeper215
+                            Commands:
+                             &7- &6/roman player vl <playername> &7 (Prints in chat a player's VL)
+                             &7- &6/roman notify &7 (Toggles alerts)
+                             &7- &6/roman mitigate [attack/setback] (attack: seconds) <playername> &7 (Mitigates a player)
+                        """));
                 return false;
             }
             else if(args[0].equalsIgnoreCase("player")) {
@@ -72,6 +77,26 @@ public class MainCommand implements CommandExecutor {
                 } else if (plugin.cheatNotify.subscribed.contains(player)) {
                     plugin.cheatNotify.subscribed.remove(player);
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.unsubscribed")));
+                }
+            } else if (args[0].equalsIgnoreCase("mitigate")) {
+                if(args[1].equalsIgnoreCase("attack")) {
+                    if(args.length == 4) {
+                        if(Bukkit.getPlayer(args[3]) == null) {
+                            player.sendMessage(ChatColor.RED + "Player with that name doesn't exist");
+                        }
+                        plugin.getAttackMitigationManager().mitigatePlayer(Integer.parseInt(args[2]), Bukkit.getPlayer(args[3]));
+                    } else {
+                        player.sendMessage(ChatColor.RED + "Correct format: /roman mitigate attack <seconds> <player>");
+                    }
+                } else if(args[1].equalsIgnoreCase("setback")) {
+                    if(args.length == 3) {
+                        if(Bukkit.getPlayer(args[2]) == null) {
+                            player.sendMessage(ChatColor.RED + "Player with that name doesn't exist");
+                        }
+                        plugin.getSetback().setbackPlayer(Bukkit.getPlayer(args[2]));
+                    } else {
+                        player.sendMessage(ChatColor.RED + "Correct format: /roman mitigate attack <seconds> <player>");
+                    }
                 }
             }
         }

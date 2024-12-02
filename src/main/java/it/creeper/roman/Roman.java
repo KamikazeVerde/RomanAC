@@ -3,7 +3,9 @@ package it.creeper.roman;
 import it.creeper.roman.banwave.Banwave;
 import it.creeper.roman.check.NewRegister;
 import it.creeper.roman.command.MainCommand;
+import it.creeper.roman.command.TestCommand;
 import it.creeper.roman.math.Mathemathics;
+import it.creeper.roman.mitigation.Attack;
 import it.creeper.roman.mitigation.Setback;
 import it.creeper.roman.notify.CheatNotify;
 import it.creeper.roman.notify.Placeholders;
@@ -26,6 +28,7 @@ public final class Roman extends JavaPlugin {
     public Mathemathics math;
     public Data data;
     public Banwave banwave;
+    public Attack attack;
     public Map<Player, Boolean> hittedPlayers = new HashMap<>();
     public static Long minToTick(long min) {
         return min * 60 * 20;
@@ -47,6 +50,7 @@ public final class Roman extends JavaPlugin {
         this.newCheckRegister = new NewRegister();
         this.data = new Data();
         this.banwave = new Banwave();
+        this.attack = new Attack();
         banwave.initBanwaveSystem();
         data.server.getPluginManager().registerEvents(getData(), this);
         //getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
@@ -110,4 +114,6 @@ public final class Roman extends JavaPlugin {
     public Mathemathics getMath() {
         return math;
     }
+
+    public Attack getAttackMitigationManager() { return attack; }
 }

@@ -7,6 +7,7 @@ violation-settings:
   ban-vl: 60
   kick-vl: 60
   setback-vl: 3
+  attack-mitigation-vl: 50
   alert-vl: 10
   vl-reset-time: 1
 
@@ -14,6 +15,9 @@ banwave-settings:
   banwave-vl: 250
   banwave-time: 1
   banwave-type: "ban"
+
+mitigation:
+  attack-reduce-factor: 3
 
 punishments:
   ban-command: "ban %player_name% 30d"
@@ -24,12 +28,13 @@ messages:
   alert-message: "%player_name% potrebbe star utilizzando %roman_check% Type: %roman_type% VL: %roman_vl%"
   vl-reset-message: "&6Tutte le &aviolazioni&6 di tutti i &cgiocatori&6 sono state &bresettate"
   subscribed: "&cYou are now subscribed to Roman alerts"
-  unsubscribed: "&cYou arent more subscribed to Roman alerts"
+  unsubscribed: "&cYou aren't more subscribed to Roman alerts"
 
 checks:
   combat:
     aura:
       a: true
+      b: true
   movement:
     groundspoof: true
     punishment: "ban"

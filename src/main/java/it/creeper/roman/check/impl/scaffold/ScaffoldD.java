@@ -15,7 +15,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 
 @PacketCheck
-@CheckInfo(name = "Scaffold", type = 'D', description = "Checks for too much rotation change")
+@CheckInfo(name = "Scaffold", type = 'D', description = "Checks for strict yaw change")
 public class ScaffoldD extends Check implements PacketListener {
     int ticks;
     float pitch;
@@ -49,7 +49,7 @@ public class ScaffoldD extends Check implements PacketListener {
                     if(!(playerData.deltasXZ.get(player) > 0.215) || !(playerData.deltasXZ.get(player) < 0.285) || player.isSprinting() || !playerData.isOnGround(player)) {
                         return;
                     }
-                    if(ticks <= 20 && isSnap(pitch, lastPitch) && !player.isSneaking()) {
+                    if(ticks <= 20 && isSnap(pitch, lastPitch) && !player.isSneaking() && playerData.isOnGround(player)) {
 
                         diffP = pitch - lastPitch;
                         diffY = yaw - lastYaw;

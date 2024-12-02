@@ -3,6 +3,7 @@ C:\Users\andre\IdeaProjects\RomanAC-main\src\main\java\it\creeper\roman\check\an
 C:\Users\andre\IdeaProjects\RomanAC-main\src\main\java\it\creeper\roman\check\Check.java
 C:\Users\andre\IdeaProjects\RomanAC-main\src\main\java\it\creeper\roman\check\CheckInfo.java
 C:\Users\andre\IdeaProjects\RomanAC-main\src\main\java\it\creeper\roman\check\impl\combat\aura\AuraA.java
+C:\Users\andre\IdeaProjects\RomanAC-main\src\main\java\it\creeper\roman\check\impl\combat\aura\AuraB.java
 C:\Users\andre\IdeaProjects\RomanAC-main\src\main\java\it\creeper\roman\check\impl\movement\FakeGround.java
 C:\Users\andre\IdeaProjects\RomanAC-main\src\main\java\it\creeper\roman\check\impl\scaffold\ScaffoldB.java
 C:\Users\andre\IdeaProjects\RomanAC-main\src\main\java\it\creeper\roman\check\impl\scaffold\ScaffoldC.java
@@ -13,9 +14,10 @@ C:\Users\andre\IdeaProjects\RomanAC-main\src\main\java\it\creeper\roman\check\im
 C:\Users\andre\IdeaProjects\RomanAC-main\src\main\java\it\creeper\roman\check\impl\test\TestCheck2.java
 C:\Users\andre\IdeaProjects\RomanAC-main\src\main\java\it\creeper\roman\check\NewRegister.java
 C:\Users\andre\IdeaProjects\RomanAC-main\src\main\java\it\creeper\roman\command\MainCommand.java
+C:\Users\andre\IdeaProjects\RomanAC-main\src\main\java\it\creeper\roman\command\TestCommand.java
 C:\Users\andre\IdeaProjects\RomanAC-main\src\main\java\it\creeper\roman\events\FlagEvent.java
+C:\Users\andre\IdeaProjects\RomanAC-main\src\main\java\it\creeper\roman\events\MitigateEvent.java
 C:\Users\andre\IdeaProjects\RomanAC-main\src\main\java\it\creeper\roman\events\PunishEvent.java
-C:\Users\andre\IdeaProjects\RomanAC-main\src\main\java\it\creeper\roman\events\SetbackEvent.java
 C:\Users\andre\IdeaProjects\RomanAC-main\src\main\java\it\creeper\roman\math\Mathemathics.java
 C:\Users\andre\IdeaProjects\RomanAC-main\src\main\java\it\creeper\roman\mitigation\Attack.java
 C:\Users\andre\IdeaProjects\RomanAC-main\src\main\java\it\creeper\roman\mitigation\Setback.java

@@ -9,14 +9,16 @@ it\creeper\roman\check\impl\test\TestCheck.class
 it\creeper\roman\mitigation\Attack.class
 it\creeper\roman\command\MainCommand.class
 it\creeper\roman\mitigation\Setback.class
+it\creeper\roman\check\impl\combat\aura\AuraB.class
 it\creeper\roman\check\impl\test\TestCheck2.class
 it\creeper\roman\notify\Placeholders.class
 it\creeper\roman\check\NewRegister.class
+it\creeper\roman\events\MitigateEvent.class
 it\creeper\roman\Roman.class
 it\creeper\roman\check\Check.class
-it\creeper\roman\events\SetbackEvent.class
 it\creeper\roman\events\FlagEvent.class
 it\creeper\roman\banwave\Banwave.class
+it\creeper\roman\command\TestCommand.class
 it\creeper\roman\notify\PlayerJoinUpdateNotify.class
 it\creeper\roman\check\impl\scaffold\ScaffoldD.class
 it\creeper\roman\check\impl\scaffold\techinique\ScaffoldGRecorder.class

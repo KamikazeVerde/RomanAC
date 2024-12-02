@@ -35,6 +35,7 @@ public class Check {
     public void possiblySetbackPlayer(Player cheater) {
         plugin.getSetback().setbackPlayer(cheater);
     }
+    public void possiblyAttackMitigatePlayer(Player cheater, int seconds) { plugin.getAttackMitigationManager().mitigatePlayer(seconds, cheater); }
     public String getCheckName(Class<?> checkClass) {
         if(checkClass.isAnnotationPresent(CheckInfo.class)) {
             return checkClass.getAnnotation(CheckInfo.class).name();
