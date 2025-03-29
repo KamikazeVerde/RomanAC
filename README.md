@@ -6,6 +6,6 @@ Roman Anticheat prevents players from using cheats that allows them to have unfa
 This project is open-source and community-driven.
 
 ## Todo
-- [ ] Checks
+- [ ] Combat Checks
 - [ ] Aura Bot
 - [ ] Various Utilities
