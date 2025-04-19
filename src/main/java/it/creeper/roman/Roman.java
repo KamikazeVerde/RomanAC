@@ -4,6 +4,7 @@ import it.creeper.roman.banwave.Banwave;
 import it.creeper.roman.check.NewRegister;
 import it.creeper.roman.command.MainCommand;
 import it.creeper.roman.command.TestCommand;
+import it.creeper.roman.events.PlayerQuitListener;
 import it.creeper.roman.math.Mathemathics;
 import it.creeper.roman.mitigation.Attack;
 import it.creeper.roman.mitigation.Setback;
@@ -53,6 +54,7 @@ public final class Roman extends JavaPlugin {
         this.attack = new Attack();
         banwave.initBanwaveSystem();
         data.server.getPluginManager().registerEvents(getData(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerQuitListener(), this);
         //getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         //getServer().getPluginManager().registerEvents(new Data(), this);
         // Check registering
@@ -88,6 +90,9 @@ public final class Roman extends JavaPlugin {
 
 
     public void onDisable() {
+        getData().recentLocations.clear();
+        getData().lastAttackTime.clear();
+        getData().attackedEntities.clear();
         getLogger().info("Shutting down Roman AntiCheat by Creeper215 :(");
     }
 

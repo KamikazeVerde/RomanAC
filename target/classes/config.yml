@@ -31,17 +31,20 @@ messages:
   unsubscribed: "&cYou aren't more subscribed to Roman alerts"
 
 checks:
-  combat:
-    aura:
-      a: true
-      b: true
+  irregularcombat:
+    x: true
+    punishment: "kick"
+  killaura:
+    a: true
+    punishment: "kick"
   movement:
-    groundspoof: true
-    punishment: "ban"
+    a: true
+    x: true
+    punishment: "kick"
   scaffold:
     b: true
-    c: true
-    d: true
+    c: false
+    d: false
     f: true
     punishment: "kick"
   test-1: false

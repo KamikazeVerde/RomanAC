@@ -25,13 +25,14 @@ public class MainCommand implements CommandExecutor {
         } else if (player.hasPermission("roman.main") && player.hasPermission("roman.notify")) {
             if(args.length == 0) {
 
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&', """
-                            &7[&cAC&7] &r&7This server is running &4Roman&c AntiCheat&7 made by &6Creeper215
-                            Commands:
-                             &7- &6/roman player vl <playername> &7 (Prints in chat a player's VL)
-                             &7- &6/roman notify &7 (Toggles alerts)
-                             &7- &6/roman mitigate [attack/setback] (attack: seconds) <playername> &7 (Mitigates a player)
-                        """));
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&',
+                        "&7[&cAC&7] &r&7This server is running &4Roman&c AntiCheat&7 made by &2Kamikaze&aVerde\n" +
+                                "&7Commands:\n" +
+                                " &7- &6/roman player vl <playername> &7 (Prints in chat a player's VL)\n" +
+                                " &7- &6/roman notify &7 (Toggles alerts)\n" +
+                                " &7- &6/roman mitigate [attack/setback] (attack: seconds) <playername> &7 (Mitigates a player)"
+                ));
+
                 return false;
             }
             else if(args[0].equalsIgnoreCase("player")) {

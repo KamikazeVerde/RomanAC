@@ -7,8 +7,10 @@ import com.github.retrooper.packetevents.protocol.player.User;
 import it.creeper.roman.Roman;
 import it.creeper.roman.check.Check;
 import it.creeper.roman.check.CheckInfo;
+import it.creeper.roman.check.annotations.PacketCheck;
 import org.bukkit.Bukkit;
 
+@PacketCheck
 @CheckInfo(name="KillAura", type='A', description = "Check for post flying packets, base Aura check")
 public class AuraA extends Check implements PacketListener {
     long lastFlying;
