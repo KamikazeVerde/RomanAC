@@ -1,6 +1,6 @@
 # Roman AntiCheat
 
-[![Discord](https://img.shields.io/discord/1295390200826167356)](https://discord.gg/c5SVxD76Wb)
+[![Discord](https://img.shields.io/discord/1295390200826167356)](https://discord.gg/h4bgzspeka)
 ![GitHub Release](https://img.shields.io/github/v/release/KamikazeVerde/RomanAC)
 
 
